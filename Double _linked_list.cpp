@@ -2,12 +2,12 @@
 #include<stdlib.h>
 struct node{
     int data;
-    struct node* prev;
     struct node* next;
+    struct node* prev;
 };
-struct node* head=NULL;
-struct node* createnode(int item){
-    struct node* ptr;
+struct node *head=NULL;
+struct node *createnode(int item){
+    struct node *ptr=NULL;
     ptr=(struct node*)malloc(sizeof(struct node));
     ptr->data=item;
     ptr->next=NULL;
@@ -15,47 +15,47 @@ struct node* createnode(int item){
     return ptr;
 }
 void addbeg(int item){
-    struct node* curr=createnode(item);
+    struct node *curr=createnode(item);
     if(head==NULL){
         head=curr;
-        return;
+        return ;
     }
     curr->next=head;
     head->prev=curr;
     head=curr;
 }
 void addend(int item){
-    struct node* curr=createnode(item);
+    struct node *curr=createnode(item);
     if(head==NULL){
         head=curr;
-        return;
+        return ;
     }
-    struct node* temp=head;
+    struct node *temp=head;
     while(temp->next!=NULL){
         temp=temp->next;
-		}
-        temp->next=curr;
-        curr->prev=temp;
     }
+    temp->next=curr;
+    curr->prev=temp;
+}
 void delbeg(){
     if(head==NULL){
-        printf("empty list\n");
+        printf("Empty list\n");
+        return;
     }
-    else{
-          head=head->next;
-        }
-	}
+    else
+        head=head->next;
+}
 void delend(){
     if(head==NULL){
-        printf("empty list\n");
-        return ;
+        printf("Empty list\n");
+        return;
     }
     if(head->next==NULL){
         free(head);
         head=NULL;
         return;
     }
-    struct node* temp=head;
+    struct node *temp=head;
     while(temp->next!=NULL)
         temp=temp->next;
         temp->prev->next=NULL;
@@ -63,24 +63,13 @@ void delend(){
 }
 void display(){
     if(head==NULL){
-        printf("empty list\n");
-        return ;
+        printf("Empty list\n");
+        return;
     }
-    struct node* temp=head;
+    struct node *temp=head;
     while(temp!=NULL){
-        printf("%d  ",temp->data);
+        printf("%d\n",temp->data);
         temp=temp->next;
-    }
-}
-void rdisplay(){
-    if(head==NULL){
-        printf("empty list\n");
-        return ;
-    }
-    struct node* temp=head;
-    while(temp!=NULL){
-        printf("%d",temp->data);
-        temp=temp->prev;
     }
 }
 int main(){
@@ -88,15 +77,15 @@ int main(){
     do
     {
       printf("\n1.addbeg\n2.addend\n3.delbeg\n4.delend\n5.display\n6.exit\n");
-      printf("enter the choice:-");
+      printf("Enter the choice:-");
       scanf("%d",&ch);
       switch(ch)
       {
-        case 1:printf("enter the number:-");
+        case 1:printf("Enter the number:-");
             scanf("%d",&d);
             addbeg(d);
             break;
-        case 2:printf("enter the number:-");
+        case 2:printf("Enter the number:-");
             scanf("%d",&d);
 			addend(d);
             break;
